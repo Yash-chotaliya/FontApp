@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">StyFont</string>
     <string name="todo">TODO</string>
+    <string name="styfont">STYFont</string>
+    <string name="enter_text_here">Enter text here</string>
 </resources>

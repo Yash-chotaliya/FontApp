@@ -9,10 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.rvlayout.view.*
 
-class rvAdapter(private val context : Context, private val data:String,val list : ArrayList<Typeface>) : RecyclerView.Adapter<rvAdapter.ViewHolder>() {
+class rvAdapter(private val context : Context, private val data:String, private val list : ArrayList<Typeface>) : RecyclerView.Adapter<rvAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.rvlayout, parent, false))
@@ -25,6 +26,7 @@ class rvAdapter(private val context : Context, private val data:String,val list 
             val clipboardManager = holder.itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData = ClipData.newPlainText("xyz",holder.rvtext.text.toString())
             clipboardManager.setPrimaryClip(clipData)
+            Toast.makeText(context,"text copied",Toast.LENGTH_SHORT).show()
         }
 
     }
