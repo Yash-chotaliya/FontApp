@@ -1,9 +1,9 @@
 package com.example.styfont
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,30 +12,29 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.rvlayout.view.*
 
-class rvAdapter(val context: Context,val listdata:String) : RecyclerView.Adapter<rvAdapter.ViewHolder>() {
+class rvAdapter(private val context : Context, private val data:String,val list : ArrayList<Typeface>) : RecyclerView.Adapter<rvAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewHolder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.rvlayout,parent,false))
-        return viewHolder
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.rvlayout, parent, false))
     }
 
-    @SuppressLint("ServiceCast")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.te.text = listdata
+        holder.rvtext.typeface = list[position]
+        holder.rvtext.text = data
         holder.copy.setOnClickListener {
             val clipboardManager = holder.itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("xyz",holder.te.text.toString())
+            val clipData = ClipData.newPlainText("xyz",holder.rvtext.text.toString())
             clipboardManager.setPrimaryClip(clipData)
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return list.size
     }
 
     class ViewHolder(itemview:View):RecyclerView.ViewHolder(itemview) {
-        val te:TextView = itemview.tv
+        val rvtext:TextView = itemview.rvtext
         val copy:ImageView = itemview.copy
     }
 }
