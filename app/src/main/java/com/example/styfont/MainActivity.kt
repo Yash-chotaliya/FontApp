@@ -4,12 +4,15 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.styfont.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val list = ArrayList<Typeface>()
         list.add(resources.getFont(R.font.f1))
@@ -24,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         list.add(resources.getFont(R.font.f10))
         list.add(resources.getFont(R.font.f11))
         list.add(resources.getFont(R.font.f12))
-        rv.layoutManager = LinearLayoutManager(this)
-        rv.adapter = rvAdapter(this,"Enter text here",list)
+        binding.rv.layoutManager = LinearLayoutManager(this)
+        binding.rv.adapter = rvAdapter(this,"Enter text here",list)
 
-        search.setOnClickListener{
-            rv.adapter = rvAdapter(this,text.text.toString(),list)
+        binding.search.setOnClickListener{
+            binding.rv.adapter = rvAdapter(this,binding.text.text.toString(),list)
         }
     }
 }
